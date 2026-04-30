@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "catalog": "mantle-prompts",
+  "updatedAt": "2026-04-30",
+  "suites": [
+    {
+      "id": "pr.adversarial-review",
+      "title": "PR Adversarial Review",
+      "description": "Serial, high-intensity adversarial pull request review prompts for Mantle CI/action workflows.",
+      "defaultVersion": "v1",
+      "versions": {
+        "v1": {
+          "status": "active",
+          "createdAt": "2026-04-30",
+          "source": "Extracted from the active Mantle agent scaffold .github/prompts files.",
+          "requiredPlaceholders": [
+            {
+              "name": "__PR_NUMBER__",
+              "description": "GitHub pull request number."
+            },
+            {
+              "name": "__REPO__",
+              "description": "GitHub repository in owner/name form."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "pr.adversarial-review.codex-initial",
+              "stage": 1,
+              "agent": "codex",
+              "path": "prompts/pr/adversarial-review/v1/codex-initial-review.md",
+              "requiredTools": ["gh", "rg"],
+              "summaryMarker": "CODEX_INITIAL_REVIEW_SUMMARY",
+              "description": "Initial Codex adversarial review before Claude has reviewed the workflow run."
+            },
+            {
+              "id": "pr.adversarial-review.claude-second-pass",
+              "stage": 2,
+              "agent": "claude",
+              "path": "prompts/pr/adversarial-review/v1/claude-second-pass-review.md",
+              "requiredTools": ["gh", "mcp__github_inline_comment__create_inline_comment"],
+              "summaryMarker": "CLAUDE_REVIEW_SUMMARY",
+              "description": "Claude adversarial review and cross-review of Codex initial findings."
+            },
+            {
+              "id": "pr.adversarial-review.codex-final",
+              "stage": 3,
+              "agent": "codex",
+              "path": "prompts/pr/adversarial-review/v1/codex-final-review.md",
+              "requiredTools": ["gh", "rg"],
+              "summaryMarker": "CODEX_FINAL_REVIEW_SUMMARY",
+              "description": "Final Codex adversarial review after Claude, including disposition of Claude findings and replies."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
