@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "mantlenetworkio-mantle-v2",
+  "repository": "mantlenetworkio/mantle-v2",
+  "url": "https://github.com/mantlenetworkio/mantle-v2",
+  "defaultBranch": "main",
+  "variables": {
+    "USER_FOCUS": "High-intensity adversarial review for Mantle V2, an OP Stack-based rollup monorepo with Go services, Solidity contracts, fault proofs, alternative data availability, and MNT-native protocol assumptions.",
+    "REPOSITORY_PROFILE": [
+      "Go and Solidity monorepo for Mantle V2, an OP Stack-based Mantle rollup implementation.",
+      "Go module: github.com/ethereum-optimism/optimism; Go toolchain is tracked in go.mod.",
+      "Major components include contracts-bedrock, op-node, op-batcher, op-proposer, op-challenger, op-program, op-service, op-chain-ops, op-deployer, op-supervisor, op-conductor, gas-oracle, op-alt-da, cannon, devnet and acceptance-test tooling.",
+      "Mantle-specific protocol context includes the upgrade sequence BaseFee -> Everest -> Euboea -> Skadi -> Limb -> Arsia, OP Stack fork alignment, a Mantle L1 data fee model, EigenDA/alternative DA support, and MNT as the native token.",
+      "Build and checks may involve Go tests, Solidity/Foundry contract tests, e2e tests, acceptance tests, devnet/Kurtosis workflows, linters, and Makefile targets.",
+      "Public contracts: rollup derivation rules, chain configuration, genesis/deploy config, batch submission behavior, output root/proposal behavior, dispute game/fault proof interfaces, preimage oracle behavior, contract ABIs/storage layouts, service CLI flags, metrics, and operational runbooks.",
+      "Consensus and bridge risk areas: deposits, withdrawals, cross-domain messaging, output roots, L1/L2 reorg handling, finality, fault proofs, dispute games, preimage data, and upgrade activation boundaries.",
+      "Data availability and fee risk areas: EigenDA/alt-DA commitments, blob/calldata selection, gas oracle updates, L1 data fee calculation, MNT-vs-ETH assumptions, and fee accounting under partial failures.",
+      "Operational risk areas: batcher/proposer/challenger/conductor liveness, retries, idempotency, key/secret handling, RPC dependency degradation, metrics/logging visibility, and safe recovery after interrupted operations.",
+      "Compatibility risk areas: upstream OP Stack drift, chain config mismatches, contract upgrade safety, generated bindings, deployment scripts, and devnet assumptions leaking into production paths.",
+      "Review should treat protocol, contract, chain-config, and service-liveness changes as high blast-radius."
+    ]
+  }
+}

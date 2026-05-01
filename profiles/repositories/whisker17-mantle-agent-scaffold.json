@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "whisker17-mantle-agent-scaffold",
+  "repository": "Whisker17/mantle-agent-scaffold",
+  "url": "https://github.com/Whisker17/mantle-agent-scaffold",
+  "defaultBranch": "main",
+  "variables": {
+    "USER_FOCUS": "High-intensity adversarial review for a TypeScript Mantle L2 DeFi tooling monorepo with MCP, CLI, and unsigned transaction builders.",
+    "REPOSITORY_PROFILE": [
+      "TypeScript npm workspace monorepo: packages/core, packages/cli, packages/mcp, plus docs and Mantle skill integrations.",
+      "Runtime: Node.js >= 20, ES modules (\"type\": \"module\").",
+      "Build and checks: npm run build, npm run typecheck, vitest unit tests, and vitest e2e tests.",
+      "Product surface: Mantle MCP server and CLI for AI agents to query Mantle L2 state and build DeFi operation payloads.",
+      "Critical safety contract: write tools return unsigned transaction payloads only; the repo must not hold private keys, sign transactions, or broadcast transactions.",
+      "Public contracts: MCP tool names and schemas, CLI flags and stdout/stderr behavior, package exports, address/token registry behavior, unsigned_tx shape {to, data, value, chainId}, and human_summary output.",
+      "DeFi integrations include Merchant Moe, Agni Finance, Fluxion, and Aave V3 on Mantle.",
+      "Main risk areas: transaction payload correctness, whitelist bypasses, unsafe spender/target addresses, token decimals, amount parsing, slippage and fee-tier handling, allowance flows, recipient mistakes, MNT gas token assumptions, and chain ID correctness.",
+      "External IO risk areas: Mantle RPC responses, subgraph/indexer SQL responses, token price data, protocol TVL data, endpoint health probes, retries, timeouts, and malformed provider responses.",
+      "Trust-boundary risk areas: MCP tool inputs/outputs, AI model generated arguments, file paths, environment variables, package exports, and npm-published package behavior.",
+      "Review should treat passing CI as necessary but not sufficient; adversarially verify safety invariants around transaction construction and protocol-specific assumptions."
+    ]
+  }
+}

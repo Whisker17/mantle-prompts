@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "mantle-xyz-reth",
+  "repository": "mantle-xyz/reth",
+  "url": "https://github.com/mantle-xyz/reth",
+  "defaultBranch": "main",
+  "variables": {
+    "USER_FOCUS": "High-intensity adversarial review for a Rust Ethereum execution client with Mantle and Optimism-specific crates, consensus, storage, networking, RPC, and node-operator safety concerns.",
+    "REPOSITORY_PROFILE": [
+      "Rust Cargo workspace for Reth, a modular Ethereum execution-layer full node implementation.",
+      "Primary language: Rust; workspace edition 2024; MSRV is tracked in Cargo.toml and README.",
+      "Workspace includes the reth binary, Ethereum crates, Optimism crates, Mantle hardfork crates, consensus, EVM, payload, RPC, P2P networking, storage, pruning, metrics, node, and testing utilities.",
+      "Build and checks commonly involve cargo, cargo nextest, clippy/lints, benchmarks, and Ethereum Foundation tests where relevant.",
+      "Public contracts: reth CLI behavior, node configuration, Engine API behavior, JSON-RPC behavior, P2P protocol compatibility, database layout/compatibility, crate APIs, metrics, and package features.",
+      "Consensus-critical risk areas: block validation, fork activation, hardfork schedule changes, payload building and validation, Engine API edge cases, state root correctness, receipt/log correctness, transaction pool behavior, and EVM execution semantics.",
+      "Storage risk areas: MDBX/database compatibility, pruning, staged sync, snapshots/history, static files, migrations, corruption recovery, and backward compatibility for node operators.",
+      "Network/RPC risk areas: peer handling, malformed network messages, DoS surfaces, RPC method compatibility, trace/debug APIs, timeouts, rate limits, and error visibility.",
+      "Optimism/Mantle risk areas: L2 payload attributes, system transactions, chain spec changes, fork-specific rules, fee accounting, and deviations from upstream Reth/Optimism behavior.",
+      "Performance and reliability matter: avoid regressions that increase sync time, memory, database growth, RPC latency, or node restart/recovery risk.",
+      "Review should treat consensus, storage, and networking changes as high blast-radius even when tests pass."
+    ]
+  }
+}

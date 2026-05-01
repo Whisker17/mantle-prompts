@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "mantlenetworkio-op-geth",
+  "repository": "mantlenetworkio/op-geth",
+  "url": "https://github.com/mantlenetworkio/op-geth",
+  "defaultBranch": "main",
+  "variables": {
+    "USER_FOCUS": "High-intensity adversarial review for a Go Ethereum execution client fork used in OP Stack and Mantle L2 contexts, with consensus, EVM, RPC, database, and node-operator safety concerns.",
+    "REPOSITORY_PROFILE": [
+      "Go Ethereum fork for execution-client functionality in OP Stack and Mantle L2 contexts.",
+      "Go module: github.com/ethereum/go-ethereum; Go version is tracked in go.mod.",
+      "Primary executable surface includes geth and related cmd utilities; core packages include EVM, state, trie, txpool, miner, consensus, p2p, RPC, accounts, eth, core/rawdb, and node services.",
+      "Build and checks commonly involve Makefile targets such as make geth or make all, plus Go unit/integration tests.",
+      "Public contracts: geth CLI flags, node configuration, genesis/chain config handling, JSON-RPC APIs, Engine API behavior where applicable, database format, P2P protocol behavior, metrics, and account/signer APIs.",
+      "Consensus-critical risk areas: EVM execution, gas accounting, block/header validation, chain config and fork activation, receipts/logs, state root correctness, transaction pool behavior, and reorg handling.",
+      "OP Stack/Mantle risk areas: L2 chain configuration, deposit and system transaction handling, fee accounting, native-token assumptions, rollup compatibility, Engine API integration, and deviations from upstream go-ethereum behavior.",
+      "Storage and recovery risk areas: LevelDB/ancient data handling, snapshots, trie/state corruption, migrations, pruning, crash recovery, and backward compatibility for existing node data directories.",
+      "Network/RPC risk areas: malformed P2P messages, DoS surfaces, RPC compatibility, trace/debug APIs, HTTP/WS/IPC exposure, auth boundaries, and error visibility.",
+      "Operational risk areas: node startup/shutdown behavior, resource leaks, sync performance, memory/disk growth, metrics, logging, and behavior under degraded peers or RPC clients.",
+      "Review should treat consensus, state, database, networking, and RPC changes as high blast-radius even when tests pass."
+    ]
+  }
+}

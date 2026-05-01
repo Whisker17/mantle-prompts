@@ -25,6 +25,9 @@ manifest.json
 README.md
 docs/
   repo-design.md
+profiles/
+  repositories/
+    <owner>-<repo>.json
 prompts/
   <domain>/
     <suite>/
@@ -45,12 +48,34 @@ suite README explicitly says so.
 
 Common placeholder names should stay stable:
 
-- `__REPO__` for `owner/name`.
-- `__PR_NUMBER__` for a GitHub pull request number.
-- `__BASE_REF__` and `__HEAD_REF__` for branch names, if needed by future
+- `{{REPO}}` for `owner/name`.
+- `{{PR_NUMBER}}` for a GitHub pull request number.
+- `{{TARGET_LABEL}}` for a human-readable target label.
+- `{{REPOSITORY_PROFILE}}` for durable repo-specific facts and risk areas.
+- `{{USER_FOCUS}}` for the repo-specific review emphasis.
+- `{{BASE_REF}}` and `{{HEAD_REF}}` for branch names, if needed by future
   prompts.
 
 The suite README must document all required placeholders.
+
+## Repository Profiles
+
+Repository profiles keep generic prompt templates from hard-coding one repo's
+language, package layout, runtime, risk areas, or CI expectations.
+
+Each profile should live at `profiles/repositories/<owner>-<repo>.json` and
+include:
+
+- `repository`: GitHub repository in `owner/name` form.
+- `variables.USER_FOCUS`: a single sentence that calibrates review intensity and
+  emphasis.
+- `variables.REPOSITORY_PROFILE`: an array of durable facts about the repository
+  and its risk model.
+
+Profiles are deliberately plain JSON so an action can select one file per repo,
+render `variables.REPOSITORY_PROFILE` as Markdown bullets, and perform string
+replacement. Profile files should not contain runtime-specific values such as
+the PR number.
 
 ## Versioning
 
@@ -71,6 +96,7 @@ Prompt versions live under `vN` directories.
 - prompt order and agent role
 - file path for each prompt
 - required placeholders
+- profile JSON paths and profile-backed variables
 - output markers used by CI to find summaries
 
 The manifest should stay small and dependency-free so it can be parsed by shell,
@@ -78,8 +104,15 @@ Node.js, Python, or `jq` in GitHub Actions.
 
 ## First Suite: PR Adversarial Review
 
-The first suite is `pr.adversarial-review` version `v1`. It was extracted from
-the active `.github/prompts` files used by the Mantle agent scaffold.
+The first suite is `pr.adversarial-review`.
+
+Version `v1` was extracted as-is from the active `.github/prompts` files used by
+the Mantle agent scaffold. It is kept for compatibility and historical
+comparison.
+
+Version `v2` is the default. It keeps the three-stage review workflow but moves
+repo-specific context into one JSON profile per repository under
+`profiles/repositories/`.
 
 The suite has three serial stages:
 
@@ -99,6 +132,14 @@ When adding a new prompt suite:
 2. Add a version directory such as `v1/`.
 3. Add self-contained prompt files with stable, descriptive names.
 4. Register the suite and prompts in `manifest.json`.
-5. Document placeholders, expected tools, output markers, and ordering.
+5. Document placeholders, profile variables, expected tools, output markers, and
+   ordering.
 6. Run a quick validation that every manifest path exists and every documented
    placeholder appears where expected.
+
+When adding support for a new repository to an existing generic suite:
+
+1. Add `profiles/repositories/<owner>-<repo>.json`.
+2. Register the profile in `manifest.json`.
+3. Render at least one prompt with the new profile to confirm no placeholders are
+   left unresolved.
