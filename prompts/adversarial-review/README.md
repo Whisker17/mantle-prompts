@@ -29,9 +29,9 @@ the current PR number. This repository does not commit rendered prompts.
 Repository-specific context lives outside the prompt templates:
 
 - `profiles/repositories/Whisker17/mantle-agent-scaffold.json`
-- `profiles/repositories/mantle-xyz/reth.json`
-- `profiles/repositories/mantlenetworkio/mantle-v2.json`
-- `profiles/repositories/mantlenetworkio/op-geth.json`
+- `profiles/repositories/Whisker17/reth.json`
+- `profiles/repositories/Whisker17/mantle-v2.json`
+- `profiles/repositories/Whisker17/op-geth.json`
 
 Add another repo by creating one JSON profile with `variables.USER_FOCUS` and
 `variables.REPOSITORY_PROFILE`, then registering it in `manifest.json`.

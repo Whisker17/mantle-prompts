@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "mantle-xyz/reth",
-  "repository": "mantle-xyz/reth",
-  "url": "https://github.com/mantle-xyz/reth",
+  "id": "Whisker17/reth",
+  "repository": "Whisker17/reth",
+  "url": "https://github.com/Whisker17/reth",
   "defaultBranch": "main",
   "variables": {
     "USER_FOCUS": "High-intensity adversarial review for a Rust Ethereum execution client with Mantle and Optimism-specific crates, consensus, storage, networking, RPC, and node-operator safety concerns.",

@@ -44,7 +44,7 @@ import json
 import os
 from pathlib import Path
 
-profile = json.loads(Path("profiles/repositories/mantle-xyz/reth.json").read_text())
+profile = json.loads(Path("profiles/repositories/Whisker17/reth.json").read_text())
 repository_profile = "\n".join(f"- {item}" for item in profile["variables"]["REPOSITORY_PROFILE"])
 repo = profile["repository"]
 pr_number = os.environ["PR_NUMBER"]
@@ -64,9 +64,9 @@ PY
 Initial profiles:
 
 - [Whisker17/mantle-agent-scaffold](profiles/repositories/Whisker17/mantle-agent-scaffold.json)
-- [mantle-xyz/reth](profiles/repositories/mantle-xyz/reth.json)
-- [mantlenetworkio/mantle-v2](profiles/repositories/mantlenetworkio/mantle-v2.json)
-- [mantlenetworkio/op-geth](profiles/repositories/mantlenetworkio/op-geth.json)
+- [Whisker17/reth](profiles/repositories/Whisker17/reth.json)
+- [Whisker17/mantle-v2](profiles/repositories/Whisker17/mantle-v2.json)
+- [Whisker17/op-geth](profiles/repositories/Whisker17/op-geth.json)
 
 This repository intentionally does not commit rendered artifacts. Consumers own
 the final rendering step so they can decide how to inject runtime values such as

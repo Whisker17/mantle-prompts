@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "mantlenetworkio/mantle-v2",
-  "repository": "mantlenetworkio/mantle-v2",
-  "url": "https://github.com/mantlenetworkio/mantle-v2",
+  "id": "Whisker17/mantle-v2",
+  "repository": "Whisker17/mantle-v2",
+  "url": "https://github.com/Whisker17/mantle-v2",
   "defaultBranch": "main",
   "variables": {
     "USER_FOCUS": "High-intensity adversarial review for Mantle V2, an OP Stack-based rollup monorepo with Go services, Solidity contracts, fault proofs, alternative data availability, and MNT-native protocol assumptions.",

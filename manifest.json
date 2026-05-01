@@ -10,22 +10,22 @@
       "profilePath": "profiles/repositories/Whisker17/mantle-agent-scaffold.json"
     },
     {
-      "id": "mantle-xyz/reth",
+      "id": "Whisker17/reth",
       "title": "Mantle Reth",
-      "repository": "mantle-xyz/reth",
-      "profilePath": "profiles/repositories/mantle-xyz/reth.json"
+      "repository": "Whisker17/reth",
+      "profilePath": "profiles/repositories/Whisker17/reth.json"
     },
     {
-      "id": "mantlenetworkio/mantle-v2",
+      "id": "Whisker17/mantle-v2",
       "title": "Mantle V2",
-      "repository": "mantlenetworkio/mantle-v2",
-      "profilePath": "profiles/repositories/mantlenetworkio/mantle-v2.json"
+      "repository": "Whisker17/mantle-v2",
+      "profilePath": "profiles/repositories/Whisker17/mantle-v2.json"
     },
     {
-      "id": "mantlenetworkio/op-geth",
+      "id": "Whisker17/op-geth",
       "title": "Mantle op-geth",
-      "repository": "mantlenetworkio/op-geth",
-      "profilePath": "profiles/repositories/mantlenetworkio/op-geth.json"
+      "repository": "Whisker17/op-geth",
+      "profilePath": "profiles/repositories/Whisker17/op-geth.json"
     }
   ],
   "suites": [
