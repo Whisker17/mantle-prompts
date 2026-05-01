@@ -2,27 +2,22 @@
 
 Shared prompt catalog for Mantle CI and GitHub Actions workflows.
 
-This repository is intentionally small: prompts are plain Markdown files,
-organized by domain and version, with a machine-readable `manifest.json` for
-actions that want discovery instead of hard-coded paths.
+The repository keeps prompt templates and repository profiles together.
+Downstream repositories render the templates with the profile they need.
 
 ## Repository Design
 
-- `prompts/<domain>/<suite>/<version>/` contains self-contained prompt files.
-- `profiles/repositories/<owner>-<repo>.json` contains repo-specific prompt
+- `prompts/<suite>/` contains generic prompt templates.
+- `profiles/repositories/<account>/<repo>.json` contains repo-specific prompt
   variables, such as `{{REPOSITORY_PROFILE}}` and `{{USER_FOCUS}}`.
-- `manifest.json` lists prompt suites, versions, prompt order, paths, and
-  required placeholders and profile sources.
+- `manifest.json` lists prompt suites, prompt order, profile paths, template
+  variables, output markers, and required tools.
 - `docs/repo-design.md` captures the catalog rules for adding future prompt
-  suites.
-- Versioned prompt paths are the stable contract. Workflows should pin this repo
-  by commit SHA or tag when deterministic behavior matters.
+  suites and repository profiles.
 
-## Available Prompt Suites
+## PR Adversarial Review
 
-### PR Adversarial Review
-
-Default path: `prompts/pr/adversarial-review/v2/`
+Template path: `prompts/adversarial-review/`
 
 This suite provides a three-pass daily PR review chain:
 
@@ -32,56 +27,47 @@ This suite provides a three-pass daily PR review chain:
 3. `codex-final-review.md` - final Codex review and disposition of Claude
    findings.
 
-Runtime placeholders:
+Templates require these variables:
 
-- `{{PR_NUMBER}}` - GitHub pull request number.
+- `{{PR_NUMBER}}` - GitHub pull request number or runtime expression chosen by
+  the consumer.
 - `{{REPO}}` - GitHub repository in `owner/name` form.
-- `{{TARGET_LABEL}}` - human-readable target label, such as
-  `PR #123 in owner/repo`.
+- `{{TARGET_LABEL}}` - human-readable target label.
+- `{{REPOSITORY_PROFILE}}` - rendered from `variables.REPOSITORY_PROFILE`.
+- `{{USER_FOCUS}}` - rendered from `variables.USER_FOCUS`.
 
-Profile-backed placeholders:
-
-- `{{REPOSITORY_PROFILE}}` - durable repo context.
-- `{{USER_FOCUS}}` - concise review emphasis for the repo.
-
-Initial repository profiles:
-
-- [Whisker17/mantle-agent-scaffold](profiles/repositories/whisker17-mantle-agent-scaffold.json)
-- [mantle-xyz/reth](profiles/repositories/mantle-xyz-reth.json)
-- [mantlenetworkio/mantle-v2](profiles/repositories/mantlenetworkio-mantle-v2.json)
-- [mantlenetworkio/op-geth](profiles/repositories/mantlenetworkio-op-geth.json)
-
-Example rendering:
+Example consumer-side rendering:
 
 ```bash
-PR_NUMBER=123 GITHUB_REPOSITORY=Whisker17/mantle-agent-scaffold python3 - <<'PY'
-from pathlib import Path
+PR_NUMBER=123 python3 - <<'PY'
 import json
 import os
+from pathlib import Path
 
-profile = json.loads(Path("profiles/repositories/whisker17-mantle-agent-scaffold.json").read_text())
+profile = json.loads(Path("profiles/repositories/mantle-xyz/reth.json").read_text())
 repository_profile = "\n".join(f"- {item}" for item in profile["variables"]["REPOSITORY_PROFILE"])
-template = Path("prompts/pr/adversarial-review/v2/codex-initial-review.md").read_text()
-rendered = (template
-  .replace("{{PR_NUMBER}}", os.environ["PR_NUMBER"])
-  .replace("{{REPO}}", os.environ["GITHUB_REPOSITORY"])
-  .replace("{{TARGET_LABEL}}", f"PR #{os.environ['PR_NUMBER']} in {os.environ['GITHUB_REPOSITORY']}")
+repo = profile["repository"]
+pr_number = os.environ["PR_NUMBER"]
+
+rendered = (Path("prompts/adversarial-review/codex-initial-review.md").read_text()
+  .replace("{{PR_NUMBER}}", pr_number)
+  .replace("{{REPO}}", repo)
+  .replace("{{TARGET_LABEL}}", f"PR #{pr_number} in {repo}")
   .replace("{{REPOSITORY_PROFILE}}", repository_profile)
   .replace("{{USER_FOCUS}}", profile["variables"]["USER_FOCUS"]))
 print(rendered)
 PY
 ```
 
-`v1` is preserved as the original Mantle agent scaffold extraction and still uses
-`__PR_NUMBER__` and `__REPO__`.
+## Repository Profiles
 
-## Consumption Guidance
+Initial profiles:
 
-For simple workflows, read a versioned prompt path directly. For workflows that
-need to select the current default suite, read `manifest.json` and resolve
-`defaultVersion`.
+- [Whisker17/mantle-agent-scaffold](profiles/repositories/Whisker17/mantle-agent-scaffold.json)
+- [mantle-xyz/reth](profiles/repositories/mantle-xyz/reth.json)
+- [mantlenetworkio/mantle-v2](profiles/repositories/mantlenetworkio/mantle-v2.json)
+- [mantlenetworkio/op-geth](profiles/repositories/mantlenetworkio/op-geth.json)
 
-Prompt files are designed to be complete after placeholder substitution. The
-default v2 suite intentionally separates generic review behavior from
-repo-specific profile content so other repositories can reuse the same review
-chain by adding a profile directory.
+This repository intentionally does not commit rendered artifacts. Consumers own
+the final rendering step so they can decide how to inject runtime values such as
+the pull request number.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "mantlenetworkio-op-geth",
+  "id": "mantlenetworkio/op-geth",
   "repository": "mantlenetworkio/op-geth",
   "url": "https://github.com/mantlenetworkio/op-geth",
   "defaultBranch": "main",

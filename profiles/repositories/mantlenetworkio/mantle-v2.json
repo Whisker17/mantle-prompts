@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "mantlenetworkio-mantle-v2",
+  "id": "mantlenetworkio/mantle-v2",
   "repository": "mantlenetworkio/mantle-v2",
   "url": "https://github.com/mantlenetworkio/mantle-v2",
   "defaultBranch": "main",

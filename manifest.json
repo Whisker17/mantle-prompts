@@ -4,148 +4,102 @@
   "updatedAt": "2026-05-01",
   "profiles": [
     {
-      "id": "whisker17-mantle-agent-scaffold",
+      "id": "Whisker17/mantle-agent-scaffold",
       "title": "Mantle Agent Scaffold",
       "repository": "Whisker17/mantle-agent-scaffold",
-      "profilePath": "profiles/repositories/whisker17-mantle-agent-scaffold.json"
+      "profilePath": "profiles/repositories/Whisker17/mantle-agent-scaffold.json"
     },
     {
-      "id": "mantle-xyz-reth",
+      "id": "mantle-xyz/reth",
       "title": "Mantle Reth",
       "repository": "mantle-xyz/reth",
-      "profilePath": "profiles/repositories/mantle-xyz-reth.json"
+      "profilePath": "profiles/repositories/mantle-xyz/reth.json"
     },
     {
-      "id": "mantlenetworkio-mantle-v2",
+      "id": "mantlenetworkio/mantle-v2",
       "title": "Mantle V2",
       "repository": "mantlenetworkio/mantle-v2",
-      "profilePath": "profiles/repositories/mantlenetworkio-mantle-v2.json"
+      "profilePath": "profiles/repositories/mantlenetworkio/mantle-v2.json"
     },
     {
-      "id": "mantlenetworkio-op-geth",
+      "id": "mantlenetworkio/op-geth",
       "title": "Mantle op-geth",
       "repository": "mantlenetworkio/op-geth",
-      "profilePath": "profiles/repositories/mantlenetworkio-op-geth.json"
+      "profilePath": "profiles/repositories/mantlenetworkio/op-geth.json"
     }
   ],
   "suites": [
     {
-      "id": "pr.adversarial-review",
-      "title": "PR Adversarial Review",
+      "id": "adversarial-review",
+      "title": "Adversarial Review",
       "description": "Serial, high-intensity adversarial pull request review prompts for CI/action workflows.",
-      "defaultVersion": "v2",
-      "versions": {
-        "v1": {
-          "status": "archived",
-          "createdAt": "2026-04-30",
-          "source": "Extracted as-is from the active Mantle agent scaffold .github/prompts files.",
-          "requiredPlaceholders": [
-            {
-              "name": "__PR_NUMBER__",
-              "description": "GitHub pull request number."
-            },
-            {
-              "name": "__REPO__",
-              "description": "GitHub repository in owner/name form."
-            }
-          ],
-          "prompts": [
-            {
-              "id": "pr.adversarial-review.v1.codex-initial",
-              "stage": 1,
-              "agent": "codex",
-              "path": "prompts/pr/adversarial-review/v1/codex-initial-review.md",
-              "requiredTools": ["gh", "rg"],
-              "summaryMarker": "CODEX_INITIAL_REVIEW_SUMMARY",
-              "description": "Initial Codex adversarial review before Claude has reviewed the workflow run."
-            },
-            {
-              "id": "pr.adversarial-review.v1.claude-second-pass",
-              "stage": 2,
-              "agent": "claude",
-              "path": "prompts/pr/adversarial-review/v1/claude-second-pass-review.md",
-              "requiredTools": ["gh", "mcp__github_inline_comment__create_inline_comment"],
-              "summaryMarker": "CLAUDE_REVIEW_SUMMARY",
-              "description": "Claude adversarial review and cross-review of Codex initial findings."
-            },
-            {
-              "id": "pr.adversarial-review.v1.codex-final",
-              "stage": 3,
-              "agent": "codex",
-              "path": "prompts/pr/adversarial-review/v1/codex-final-review.md",
-              "requiredTools": ["gh", "rg"],
-              "summaryMarker": "CODEX_FINAL_REVIEW_SUMMARY",
-              "description": "Final Codex adversarial review after Claude, including disposition of Claude findings and replies."
-            }
-          ]
-        },
-        "v2": {
-          "status": "active",
-          "createdAt": "2026-05-01",
-          "source": "Genericized from v1 with repository-specific context moved into profiles/repositories.",
-          "requiredPlaceholders": [
-            {
-              "name": "{{PR_NUMBER}}",
-              "description": "GitHub pull request number."
-            },
-            {
-              "name": "{{REPO}}",
-              "description": "GitHub repository in owner/name form."
-            },
-            {
-              "name": "{{TARGET_LABEL}}",
-              "description": "Human-readable target label, for example `PR #123 in owner/repo`."
-            },
-            {
-              "name": "{{USER_FOCUS}}",
-              "description": "Repo-specific review emphasis, usually loaded from a repository profile."
-            },
-            {
-              "name": "{{REPOSITORY_PROFILE}}",
-              "description": "Repo-specific durable context, usually loaded from a repository profile."
-            }
-          ],
-          "profileVariables": [
-            {
-              "name": "{{USER_FOCUS}}",
-              "defaultSource": "variables.USER_FOCUS"
-            },
-            {
-              "name": "{{REPOSITORY_PROFILE}}",
-              "defaultSource": "variables.REPOSITORY_PROFILE"
-            }
-          ],
-          "prompts": [
-            {
-              "id": "pr.adversarial-review.v2.codex-initial",
-              "stage": 1,
-              "agent": "codex",
-              "path": "prompts/pr/adversarial-review/v2/codex-initial-review.md",
-              "requiredTools": ["gh", "rg"],
-              "summaryMarker": "CODEX_INITIAL_REVIEW_SUMMARY",
-              "description": "Initial generic Codex adversarial review before Claude has reviewed the workflow run."
-            },
-            {
-              "id": "pr.adversarial-review.v2.claude-second-pass",
-              "stage": 2,
-              "agent": "claude",
-              "path": "prompts/pr/adversarial-review/v2/claude-second-pass-review.md",
-              "requiredTools": ["gh", "mcp__github_inline_comment__create_inline_comment"],
-              "summaryMarker": "CLAUDE_REVIEW_SUMMARY",
-              "description": "Generic Claude adversarial review and cross-review of Codex initial findings."
-            },
-            {
-              "id": "pr.adversarial-review.v2.codex-final",
-              "stage": 3,
-              "agent": "codex",
-              "path": "prompts/pr/adversarial-review/v2/codex-final-review.md",
-              "requiredTools": ["gh", "rg"],
-              "summaryMarker": "CODEX_FINAL_REVIEW_SUMMARY",
-              "description": "Generic final Codex adversarial review after Claude, including disposition of Claude findings and replies."
-            }
-          ]
+      "consumerRuntimeEnv": [
+        {
+          "name": "PR_NUMBER",
+          "description": "GitHub pull request number supplied by the consumer during rendering or runtime."
         }
-      }
+      ],
+      "templatePlaceholders": [
+        {
+          "name": "{{PR_NUMBER}}",
+          "description": "GitHub pull request number or runtime expression chosen by the consumer."
+        },
+        {
+          "name": "{{REPO}}",
+          "description": "Rendered from the selected repository profile."
+        },
+        {
+          "name": "{{TARGET_LABEL}}",
+          "description": "Rendered from `$PR_NUMBER` and the selected repository profile."
+        },
+        {
+          "name": "{{USER_FOCUS}}",
+          "description": "Rendered from variables.USER_FOCUS in the selected repository profile."
+        },
+        {
+          "name": "{{REPOSITORY_PROFILE}}",
+          "description": "Rendered from variables.REPOSITORY_PROFILE in the selected repository profile."
+        }
+      ],
+      "profileVariables": [
+        {
+          "name": "{{USER_FOCUS}}",
+          "defaultSource": "variables.USER_FOCUS"
+        },
+        {
+          "name": "{{REPOSITORY_PROFILE}}",
+          "defaultSource": "variables.REPOSITORY_PROFILE"
+        }
+      ],
+      "prompts": [
+        {
+          "id": "adversarial-review.codex-initial",
+          "stage": 1,
+          "agent": "codex",
+          "templatePath": "prompts/adversarial-review/codex-initial-review.md",
+          "requiredTools": ["gh", "rg"],
+          "summaryMarker": "CODEX_INITIAL_REVIEW_SUMMARY",
+          "description": "Initial Codex adversarial review before Claude has reviewed the workflow run."
+        },
+        {
+          "id": "adversarial-review.claude-second-pass",
+          "stage": 2,
+          "agent": "claude",
+          "templatePath": "prompts/adversarial-review/claude-second-pass-review.md",
+          "requiredTools": ["gh", "mcp__github_inline_comment__create_inline_comment"],
+          "summaryMarker": "CLAUDE_REVIEW_SUMMARY",
+          "description": "Claude adversarial review and cross-review of Codex initial findings."
+        },
+        {
+          "id": "adversarial-review.codex-final",
+          "stage": 3,
+          "agent": "codex",
+          "templatePath": "prompts/adversarial-review/codex-final-review.md",
+          "requiredTools": ["gh", "rg"],
+          "summaryMarker": "CODEX_FINAL_REVIEW_SUMMARY",
+          "description": "Final Codex adversarial review after Claude, including disposition of Claude findings and replies."
+        }
+      ]
     }
   ]
 }

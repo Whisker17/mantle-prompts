@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "mantle-xyz-reth",
+  "id": "mantle-xyz/reth",
   "repository": "mantle-xyz/reth",
   "url": "https://github.com/mantle-xyz/reth",
   "defaultBranch": "main",
